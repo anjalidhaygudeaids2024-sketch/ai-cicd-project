@@ -1,3 +1,4 @@
+```groovy
 pipeline {
     agent any
 
@@ -30,7 +31,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'sudo docker build -t ai-model:latest .'
+                sh 'docker build -t ai-model:latest .'
             }
         }
 
