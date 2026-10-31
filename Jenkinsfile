@@ -8,21 +8,23 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Create Virtual Environment') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'python3 -m venv venv'
+                sh 'venv/bin/pip install --upgrade pip'
+                sh 'venv/bin/pip install -r requirements.txt'
             }
         }
 
         stage('Train AI Model') {
             steps {
-                sh 'python train_model.py'
+                sh 'venv/bin/python train_model.py'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'python -m pytest -v'
+                sh 'venv/bin/python -m pytest -v'
             }
         }
 
